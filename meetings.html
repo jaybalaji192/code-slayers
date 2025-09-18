@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meeting Rooms</title>
+
+    <style>
+        /* General body styles */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Main container for the app */
+        #app {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 24px;
+            text-align: center;
+        }
+
+        /* Main heading style */
+        h1 {
+            color: #1c1e21;
+            margin-top: 0;
+            margin-bottom: 24px;
+            font-size: 2em;
+        }
+
+        /* Container for the list of rooms */
+        #room-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        /* Individual room item styling */
+        .room-item {
+            background-color: #e7f3ff;
+            color: #1877f2;
+            border: 1px solid #cce0ff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+            text-align: left;
+        }
+
+        /* Hover effect for room items */
+        .room-item:hover {
+            background-color: #d1e6ff;
+            transform: translateY(-2px);
+            /* Slight lift effect */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>The Code Slayers 🥷🏻 Rooms 🖥️</h1>
+        <div id="room-list">
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // JSON data for meeting rooms. You can easily add, remove, or edit rooms here.
+            const roomsData = [
+                {
+                    topic: "📅 General Catch-up",
+                    link: "https://meet.google.com/aig-nbxk-nap"
+                },
+                {
+                    topic: "🚀 Project Apollo - Daily Standup",
+                    link: "https://meet.google.com/abc-def-ghi"
+                },
+                {
+                    topic: "💡 Marketing Brainstorm Session",
+                    link: "https://meet.google.com/jkl-mno-pqr"
+                },
+                {
+                    topic: "📈 Q3 Financial Review",
+                    link: "https://meet.google.com/stu-vwx-yza"
+                },
+                {
+                    topic: "🔧 Engineering All-Hands",
+                    link: "https://meet.google.com/bcd-efg-hij"
+                },
+                {
+                    topic: "🎨 UI/UX Design Sync",
+                    link: "https://meet.google.com/klm-nop-qrs"
+                }
+            ];
+
+            // Get the container element where the rooms will be listed
+            const roomListContainer = document.getElementById('room-list');
+
+            // Ensure the container element exists before proceeding
+            if (roomListContainer) {
+
+                // If there are no rooms, display a message
+                if (roomsData.length === 0) {
+                    roomListContainer.innerHTML = '<p>No rooms available at the moment.</p>';
+                    return;
+                }
+
+                // Loop through each room in the JSON data
+                roomsData.forEach(room => {
+                    // Create a new 'div' element for the room
+                    const roomElement = document.createElement('div');
+                    roomElement.className = 'room-item';
+                    roomElement.textContent = room.topic;
+
+                    // Add a click event listener to open the link in a new tab
+                    roomElement.addEventListener('click', () => {
+                        window.open(room.link, '_blank');
+                    });
+
+                    // Append the newly created room element to the list container
+                    roomListContainer.appendChild(roomElement);
+                });
+            } else {
+                console.error('Error: The element with ID "room-list" was not found in the document.');
+            }
+        });
+    </script>
+
+</body>
+
+</html>
